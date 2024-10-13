@@ -16,7 +16,7 @@ export const ImagesContextProvider = ({
 
   useEffect(() => {
     fetchImages();
-  }, [images]);
+  }, []);
 
   const fetchImages = async () => {
     await axios
