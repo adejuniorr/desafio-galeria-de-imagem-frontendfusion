@@ -54,12 +54,12 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
           onClick={() => setOpenFilter(!openFilter)}
           title="Filtrar"
           type="button"
-          className="text-xl flex flex-col fixed z-10 bottom-0 right-0 bg-white mb-16 mr-4 rounded-md p-2 shadow-md shadow-slate-500"
+          className="text-xl flex flex-col fixed z-10 top-0 right-0 bg-white mt-6 mr-4 rounded-full p-4 shadow-md shadow-slate-500"
         >
           <FaFilter />
         </button>
       ) : (
-        <div className="flex flex-col fixed z-20 bottom-0 right-0 m-4 rounded-md p-2 shadow-md shadow-slate-500 bg-white">
+        <div className="flex flex-col fixed z-20 top-0 right-0 m-6 rounded-md p-2 shadow-md shadow-slate-500 bg-white">
           <div className="flex items-center justify-between">
             <label
               htmlFor="Authors"
@@ -72,7 +72,7 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
               title="Fechar seletor"
               type="button"
             >
-              <FaXmark />
+              <FaXmark className="text-2xl" />
             </button>
           </div>
           <select
