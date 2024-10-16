@@ -54,12 +54,12 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
           onClick={() => setOpenFilter(!openFilter)}
           title="Filtrar"
           type="button"
-          className="text-xl flex flex-col fixed z-10 top-0 right-0 bg-white mt-6 mr-4 rounded-full p-4 shadow-md shadow-slate-500"
+          className="md:hidden text-xl flex flex-col fixed z-10 top-0 right-0 bg-white mt-6 mr-4 rounded-full p-4 shadow-md shadow-slate-500"
         >
           <FaFilter />
         </button>
       ) : (
-        <div className="flex flex-col fixed z-20 top-0 right-0 m-6 rounded-md p-2 shadow-md shadow-slate-500 bg-white">
+        <div className="md:hidden flex flex-col fixed z-20 top-0 right-0 m-6 rounded-md p-2 shadow-md shadow-slate-500 bg-white">
           <div className="flex items-center justify-between">
             <label
               htmlFor="Authors"
@@ -91,6 +91,30 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
           </select>
         </div>
       )}
+      <div className="max-md:hidden">
+        <div className="flex flex-col rounded-md">
+          <label
+            htmlFor="Authors"
+            className="block text-[1.4rem] font-medium text-gray-800"
+          >
+            Filtrar por autor(a)
+          </label>
+          <select
+            name="Authors"
+            title="Filtrar imagens por autor(a)"
+            id=""
+            onChange={(e) => filterImagesByAuthor(images, e.target.value)}
+            className="mt-2 py-2 rounded-md cursor-pointer border-gray-300 border-[2px] text-gray-700 sm:text-[1rem] outline-none"
+          >
+            <option value="Todos">Todos</option>
+            {authorsList.map((author: string, index: number) => (
+              <option value={author} key={index}>
+                {author}
+              </option>
+            ))}
+          </select>
+        </div>
+      </div>
     </>
   );
 };

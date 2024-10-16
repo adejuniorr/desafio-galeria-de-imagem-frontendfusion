@@ -3,7 +3,6 @@ import { ImagesContext } from "../contexts/ImagesContext";
 import { ImagesFilter } from "./ImagesFilter";
 import { FaPlus } from "react-icons/fa";
 import { Modal } from "../components/Modal";
-import clsx from "clsx";
 
 export const ImageList = () => {
   const { images } = useContext(ImagesContext);
@@ -23,7 +22,7 @@ export const ImageList = () => {
   return (
     <>
       <ImagesFilter images={images} setImageList={setImageList} />
-      <div className="pb-24 columns-3 gap-0 sm:gap-[8px] mt-8 w-[95vw]">
+      <div className="pb-24 columns-3 gap-0 sm:gap-[8px] mt-8 ">
         {imageList
           .sort((a: any, b: any) => b.height - a.height)
           .map((image: any) => (
