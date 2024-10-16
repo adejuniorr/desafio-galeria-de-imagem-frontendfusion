@@ -5,13 +5,12 @@ import { FaPlus } from "react-icons/fa";
 import { Modal } from "../components/Modal";
 
 export const ImageList = () => {
-  const { images } = useContext(ImagesContext);
-  const [imageList, setImageList] = useState<any[]>([]);
+  const { images, currentImageList, updateCurrentImages } = useContext(ImagesContext);
   const [imageDetailsOpen, setImageDetailsOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<{}>({});
 
   useEffect(() => {
-    setImageList(images);
+    updateCurrentImages(images);
   }, [images]);
 
   const handleOpenModal = (imageInfo: {}) => {
@@ -21,9 +20,9 @@ export const ImageList = () => {
 
   return (
     <>
-      <ImagesFilter images={images} setImageList={setImageList} />
+      <ImagesFilter images={images} setImageList={updateCurrentImages} />
       <div className="pb-24 columns-3 gap-0 sm:gap-[8px] mt-8 ">
-        {imageList
+        {currentImageList
           .sort((a: any, b: any) => b.height - a.height)
           .map((image: any) => (
             <div className="relative h-fit sm:mb-[8px]" key={image.id}>

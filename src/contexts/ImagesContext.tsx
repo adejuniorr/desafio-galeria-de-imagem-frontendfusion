@@ -3,9 +3,15 @@ import axios from "axios";
 
 interface ImageContextProps {
   images: object[];
+  currentImageList: object[];
+  updateCurrentImages: (images: any) => void;
 }
 
-export const ImagesContext = createContext<ImageContextProps>({ images: [] });
+export const ImagesContext = createContext<ImageContextProps>({
+  images: [],
+  currentImageList: [],
+  updateCurrentImages: () => {},
+});
 
 export const ImagesContextProvider = ({
   children,
@@ -13,6 +19,7 @@ export const ImagesContextProvider = ({
   children: ReactNode;
 }) => {
   const [images, setImages] = useState<object[]>([]);
+  const [currentImageList, setCurrentImageList] = useState<object[]>([]);
 
   useEffect(() => {
     fetchImages();
@@ -29,8 +36,14 @@ export const ImagesContextProvider = ({
       });
   };
 
+  const updateCurrentImages = (images: any) => {
+    setCurrentImageList(images);
+  };
+
   return (
-    <ImagesContext.Provider value={{ images }}>
+    <ImagesContext.Provider
+      value={{ images, currentImageList, updateCurrentImages }}
+    >
       {children}
     </ImagesContext.Provider>
   );
