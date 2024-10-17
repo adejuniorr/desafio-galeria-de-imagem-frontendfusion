@@ -1,11 +1,11 @@
 import { useContext, useEffect, useState } from "react";
 import { ImagesContext } from "../contexts/ImagesContext";
-import { ImagesFilter } from "./ImagesFilter";
 import { FaPlus } from "react-icons/fa";
 import { Modal } from "../components/Modal";
 
 export const ImageList = () => {
-  const { images, currentImageList, updateCurrentImages } = useContext(ImagesContext);
+  const { images, currentImageList, updateCurrentImages } =
+    useContext(ImagesContext);
   const [imageDetailsOpen, setImageDetailsOpen] = useState<boolean>(false);
   const [modalInfo, setModalInfo] = useState<{}>({});
 
@@ -14,19 +14,18 @@ export const ImageList = () => {
   }, [images]);
 
   const handleOpenModal = (imageInfo: {}) => {
-    setImageDetailsOpen(true);
+    setImageDetailsOpen(!imageDetailsOpen);
     setModalInfo(imageInfo);
   };
 
   return (
     <>
-      <ImagesFilter images={images} setImageList={updateCurrentImages} />
-      <div className="pb-24 columns-3 gap-0 sm:gap-[8px] mt-8 ">
+      <div className="pb-24 columns-2 sm:columns-3 gap-0 sm:gap-[8px] px-3 lg:px-[8vw]">
         {currentImageList
           .sort((a: any, b: any) => b.height - a.height)
           .map((image: any) => (
             <div className="relative h-fit sm:mb-[8px]" key={image.id}>
-              <div className="relative overflow-hidden max-w-[35vw] border border-gray-200">
+              <div className="relative overflow-hidden max-w-[46vw] sm:max-w-[35vw] border border-gray-200">
                 <div
                   className="sm:hidden w-[100%] h-[100%] bg-transparent absolute"
                   onClick={() => handleOpenModal(image)}
@@ -49,6 +48,6 @@ export const ImageList = () => {
         setImageDetailsOpen={setImageDetailsOpen}
         modalInfo={modalInfo}
       />
-    </>
+      </>
   );
 };
