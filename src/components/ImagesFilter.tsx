@@ -1,14 +1,16 @@
-import React, { useMemo, useState } from "react";
-import { FaFilter } from "react-icons/fa";
-import { FaXmark } from "react-icons/fa6";
+import { useMemo } from "react";
 
 interface ImagesFilterProps {
   images: any[];
   setImageList: React.Dispatch<React.SetStateAction<any[]>>;
+  setMenuVisibility: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
-export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
-  const [openFilter, setOpenFilter] = useState(true);
+export const ImagesFilter = ({
+  images,
+  setImageList,
+  setMenuVisibility,
+}: ImagesFilterProps) => {
   /**
    * Filtra as imagens pelo autor selecionado no `select`.
    *
@@ -49,49 +51,7 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
 
   return (
     <>
-      {openFilter ? (
-        <button
-          onClick={() => setOpenFilter(!openFilter)}
-          title="Filtrar"
-          type="button"
-          className="md:hidden text-xl flex flex-col fixed z-10 top-0 right-0 bg-white mt-6 mr-4 rounded-full p-4 shadow-md shadow-slate-500"
-        >
-          <FaFilter />
-        </button>
-      ) : (
-        <div className="md:hidden flex flex-col fixed z-20 top-0 right-0 m-6 rounded-md p-2 shadow-md shadow-slate-500 bg-white">
-          <div className="flex items-center justify-between">
-            <label
-              htmlFor="Authors"
-              className="block text-lg font-medium text-gray-800"
-            >
-              Filtrar por autor(a)
-            </label>
-            <button
-              onClick={() => setOpenFilter(!openFilter)}
-              title="Fechar seletor"
-              type="button"
-            >
-              <FaXmark className="text-2xl" />
-            </button>
-          </div>
-          <select
-            name="Authors"
-            title="authors-select"
-            id=""
-            onChange={(e) => filterImagesByAuthor(images, e.target.value)}
-            className="w-[200px] mt-2 py-2 rounded-md cursor-pointer border-gray-300 border-[2px] text-gray-700 sm:text-sm outline-none"
-          >
-            <option value="Todos">Todos</option>
-            {authorsList.map((author: string, index: number) => (
-              <option value={author} key={index}>
-                {author}
-              </option>
-            ))}
-          </select>
-        </div>
-      )}
-      <div className="max-md:hidden">
+      <div className="">
         <div className="flex flex-col rounded-md">
           <label
             htmlFor="Authors"
@@ -103,7 +63,10 @@ export const ImagesFilter = ({ images, setImageList }: ImagesFilterProps) => {
             name="Authors"
             title="Filtrar imagens por autor(a)"
             id=""
-            onChange={(e) => filterImagesByAuthor(images, e.target.value)}
+            onChange={(e) => {
+              filterImagesByAuthor(images, e.target.value);
+              setMenuVisibility(false);
+            }}
             className="mt-2 py-2 rounded-md cursor-pointer border-gray-300 border-[2px] text-gray-700 sm:text-[1rem] outline-none"
           >
             <option value="Todos">Todos</option>
