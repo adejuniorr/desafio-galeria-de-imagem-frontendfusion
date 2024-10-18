@@ -6,6 +6,7 @@ import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import { ErrorPage } from "./ErrorPage";
 import { RootLayout } from "./routes/RootLayout";
 import { ImageList } from "./components/ImageList";
+import { FavoriteImagesContextProvider } from "./contexts/FavoriteImagesContext";
 
 const router = createBrowserRouter([
   {
@@ -23,8 +24,10 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById("root") as HTMLElement).render(
   <React.StrictMode>
-    <ImagesContextProvider>
-      <RouterProvider router={router} />
-    </ImagesContextProvider>
+    <FavoriteImagesContextProvider>
+      <ImagesContextProvider>
+        <RouterProvider router={router} />
+      </ImagesContextProvider>
+    </FavoriteImagesContextProvider>
   </React.StrictMode>
 );
