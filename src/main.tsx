@@ -7,6 +7,7 @@ import { ErrorPage } from "./ErrorPage";
 import { RootLayout } from "./routes/RootLayout";
 import { ImageList } from "./components/ImageList";
 import { FavoriteImagesContextProvider } from "./contexts/FavoriteImagesContext";
+import { Favorites } from "./components/Favorites";
 
 const router = createBrowserRouter([
   {
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
       {
         path: "/",
         element: <ImageList />,
+      },
+      {
+        path: "/favoritos",
+        element: <Favorites />,
       },
     ],
   },
