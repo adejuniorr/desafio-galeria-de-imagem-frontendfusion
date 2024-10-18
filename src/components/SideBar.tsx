@@ -1,15 +1,18 @@
 import { useContext, useState } from "react";
 import clsx from "clsx";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { IoMenu } from "react-icons/io5";
 import { HiOutlineXMark } from "react-icons/hi2";
 import { FaGithub, FaGlobe, FaImage, FaRegHeart } from "react-icons/fa";
+import { AiOutlineHome } from "react-icons/ai";
 import { ImagesContext } from "../contexts/ImagesContext";
-import { ImagesFilter } from "./ImagesFilter";
+import { ImagesFilter } from "./ImageList/ImagesFilter";
 
 export const SideBarNav = () => {
   const [menuVisibility, setMenuVisibility] = useState(false);
   const { images, updateCurrentImages } = useContext(ImagesContext);
+  const location = useLocation();
+  const currentPath = location.pathname;
 
   const footerClass =
     "underline w-full h-16 flex items-center justify-center px-6 cursor-pointer text-slate-900";
@@ -20,7 +23,7 @@ export const SideBarNav = () => {
         title="Abrir menu"
         type="button"
         onClick={() => setMenuVisibility(!menuVisibility)}
-        className="lg:hidden text-slate-900 text-[2rem] bg-gray-50 absolute z-40 lg:bottom-0 sm:top-0 right-0 mx-3 my-4 p-2 border-2 rounded-md"
+        className="lg:hidden text-slate-900 text-[2rem] bg-gray-50 absolute z-40 lg:bottom-0 sm:top-0 right-0 mx-6 my-4 p-2 border-2 rounded-md"
       >
         <IoMenu />
       </button>
@@ -30,9 +33,9 @@ export const SideBarNav = () => {
           { "translate-x-full": menuVisibility === false }
         )}
       >
-        <nav>
-          <ul>
-            <li className="p-6 flex items-center  justify-between">
+        <nav className="h-full">
+          <ul className="h-[70%]">
+            <li className="p-6 flex items-center justify-between">
               <Link
                 to="/"
                 className="text-2xl font-bold flex gap-2 items-center"
@@ -48,23 +51,33 @@ export const SideBarNav = () => {
                 <HiOutlineXMark />
               </button>
             </li>
+            {currentPath === "/" && (
+              <li className="px-6 mb-4">
+                <ImagesFilter
+                  images={images}
+                  setImageList={updateCurrentImages}
+                  setMenuVisibility={setMenuVisibility}
+                />
+              </li>
+            )}
             <li className="px-6 mb-4">
-              <ImagesFilter
-                images={images}
-                setImageList={updateCurrentImages}
-                setMenuVisibility={setMenuVisibility}
-              />
+              <Link
+                className="flex items-center hover:underline text-[1.4rem]"
+                to="/"
+              >
+                <AiOutlineHome className="text-[1.6rem] mr-2" /> Home
+              </Link>
             </li>
             <li className="px-6 mb-4">
               <Link
-                className="flex items-center hover:underline"
+                className="flex items-center hover:underline text-[1.4rem]"
                 to="favoritos"
               >
-                <FaRegHeart className="text-[1.4rem] mr-2" /> Favoritos
+                <FaRegHeart className="text-[1.6rem] mr-2" /> Favoritos
               </Link>
             </li>
           </ul>
-          <div className="flex flex-col items-center mt-[95%]">
+          <div className="flex flex-col items-center">
             <Link
               className={footerClass}
               to="https://github.com/adejuniorr/desafio-galeria-de-imagem-frontendfusion"
