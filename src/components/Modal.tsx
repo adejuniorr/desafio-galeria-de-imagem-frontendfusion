@@ -1,6 +1,7 @@
 import clsx from "clsx";
 import { FaDownload, FaGlobe, FaHeart, FaRegHeart } from "react-icons/fa";
 import { FaXmark } from "react-icons/fa6";
+import FavoriteButton from "./buttons/FavoriteButton";
 
 interface ModalProps {
   imageDetailsOpen: boolean;
@@ -13,7 +14,6 @@ export const Modal = ({
   setImageDetailsOpen,
   modalInfo,
 }: ModalProps) => {
-  const handleFavoriteButton = () => {};
 
   const download = () => {
     let element = document.createElement("a");
@@ -75,13 +75,7 @@ export const Modal = ({
               </p>
             </div>
             <div className="flex justify-between items-center gap-4 mt-6">
-              <button
-                onClick={handleFavoriteButton}
-                type="button"
-                className="rounded-full border border-gray-300 p-3"
-              >
-                <FaRegHeart className="text-red-500" />
-              </button>
+              <FavoriteButton image={modalInfo} />
               <div className="flex justify-end items-center gap-4 md:text-[1.2rem]">
                 <a
                   target="_blank"
