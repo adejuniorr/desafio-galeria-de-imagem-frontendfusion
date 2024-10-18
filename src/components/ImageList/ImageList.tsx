@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { ImagesContext } from "../contexts/ImagesContext";
 import { FaPlus } from "react-icons/fa";
-import { Modal } from "./ImageList/Modal";
+import { Modal } from "./Modal";
 
 export const ImageList = () => {
   const { images, currentImageList, updateCurrentImages } =
